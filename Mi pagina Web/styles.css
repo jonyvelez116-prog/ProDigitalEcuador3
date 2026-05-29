@@ -1,0 +1,1679 @@
+/* ============================================================
+   PRO DIGITAL — css/styles.css
+   ============================================================ */
+
+
+/* ============================================================
+   1. VARIABLES DE DISEÑO — PALETA STITCH + EXTENSIONES PRO DIGITAL
+ 
+ ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+ 
+:root {
+  /* --- Colores base (extraídos del shell HTML de Stitch) --- */
+  --color-bg-primary:        #191a1f;   /* Fondo principal Stitch html/body */
+  --color-bg-secondary:      #1e1f26;   /* Fondo de secciones alternas */
+  --color-bg-card:           #23242d;   /* Fondo de tarjetas/paneles */
+  --color-bg-card-hover:     #2a2b36;   /* Tarjeta en hover */
+  --color-surface-high:      #2e2f3a;   /* dt-surface-container-high Stitch */
+  --color-surface-mid:       #252630;   /* Superficie media */
+
+  /* --- Bordes (extraídos directamente del sidebar Stitch) --- */
+  --color-border:            #404040;   /* border-right: 1px solid #404040 */
+  --color-border-subtle:     #2e2f3a;   /* Borde más sutil para cards */
+  --color-border-focus:      #4d90fe;   /* Focus ring Stitch (goog-buttonset) */
+
+  /* --- Tipografía y texto (Stitch body color: #fff) --- */
+  --color-text-primary:      #ffffff;   /* Texto principal */
+  --color-text-secondary:    #9aa0b0;   /* Texto secundario/subtítulos */
+  --color-text-muted:        #616161;   /* picker-close-button-svg fill */
+  --color-text-nav:          #c8cad4;   /* Links de navegación */
+
+  /* --- Azul primario Stitch (goog-buttonset-action) --- */
+  --color-accent-primary:    #4d90fe;   /* Azul principal Stitch */
+  --color-accent-primary-hv: #357ae8;   /* Hover state del botón azul Stitch */
+  --color-accent-primary-dk: #2f5bb7;   /* Active/border del botón Stitch */
+  --color-accent-secondary:  #4787ed;   /* Gradiente inferior del botón Stitch */
+
+  /* --- Glow / Neón (derivado de la paleta de acento Stitch) --- */
+  --glow-accent:             0 0 20px rgba(77, 144, 254, 0.35),
+                             0 0 60px rgba(77, 144, 254, 0.15);
+  --glow-accent-strong:      0 0 30px rgba(77, 144, 254, 0.55),
+                             0 0 80px rgba(77, 144, 254, 0.25);
+  --glow-card:               0 4px 16px rgba(0, 0, 0, 0.50),
+                             0 1px 3px  rgba(0, 0, 0, 0.30);
+  --glow-card-hover:         0 8px 32px rgba(0, 0, 0, 0.60),
+                             0 0 24px  rgba(77, 144, 254, 0.20);
+
+  /* --- Gradientes (derivados de los gradientes de botones Stitch) --- */
+  --gradient-btn:            linear-gradient(180deg, #4d90fe 0%, #4787ed 100%);
+  --gradient-btn-hover:      linear-gradient(180deg, #4d90fe 0%, #357ae8 100%);
+  --gradient-hero:           linear-gradient(135deg, #191a1f 0%, #1e2035 50%, #191a1f 100%);
+  --gradient-card:           linear-gradient(145deg, #23242d 0%, #1e1f26 100%);
+  --gradient-section:        linear-gradient(180deg, #191a1f 0%, #1a1b22 100%);
+  --gradient-text-accent:    linear-gradient(90deg, #4d90fe 0%, #78b0ff 100%);
+
+  /* --- Scrim (Stitch modal bg: rgba(32,33,36,.6)) --- */
+  --color-scrim:             rgba(32, 33, 36, 0.85);
+
+  /* --- Tipografía (Stitch: font-family: Google Sans; font-size: 13px base) --- */
+--font-primary: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;  --font-mono:               'Roboto Mono', 'Courier New', monospace;
+
+  --font-size-base:          13px;      /* Stitch base font-size */
+  --font-size-xs:            11px;      /* Stitch button font-size */
+  --font-size-sm:            12px;      /* Stitch nav font-size */
+  --font-size-md:            14px;
+  --font-size-lg:            16px;      /* Stitch modal-dialog-title */
+  --font-size-xl:            20px;
+  --font-size-2xl:           28px;
+  --font-size-3xl:           36px;
+  --font-size-4xl:           48px;
+  --font-size-5xl:           60px;
+
+  --font-weight-regular:     400;
+  --font-weight-medium:      500;
+  --font-weight-semibold:    600;
+  --font-weight-bold:        700;       /* Stitch button font-weight */
+
+  --line-height-base:        1.35;      /* Stitch body line-height */
+  --line-height-heading:     1.15;
+  --line-height-relaxed:     1.6;
+  --line-height-modal:       24px;      /* Stitch modal-dialog-title line-height */
+
+  /* --- Espaciados (extraídos de Stitch: padding: 16px 0 nav, padding: 0 16px mobile) --- */
+  --space-2:    2px;
+  --space-4:    4px;
+  --space-8:    8px;
+  --space-10:   10px;   /* Stitch primary-nav gap mobile */
+  --space-12:   12px;   /* Stitch picker-close-button top */
+  --space-14:   14px;   /* Stitch picker-close-button right */
+  --space-16:   16px;   /* Stitch nav padding */
+  --space-17:   17px;   /* Stitch close-button padding */
+  --space-18:   18px;   /* Stitch google-picker close top */
+  --space-20:   20px;
+  --space-24:   24px;
+  --space-30:   30px;   /* Stitch modal padding-top */
+  --space-32:   32px;
+  --space-42:   42px;   /* Stitch modal padding horizontal */
+  --space-48:   48px;   /* Stitch --ogb-height */
+  --space-64:   64px;
+  --space-80:   80px;   /* Stitch sidebar width */
+  --space-96:   96px;
+  --space-120:  120px;
+  --space-160:  160px;
+
+  /* --- Bordes redondeados (Stitch: border-radius: 24px picker, 18px close-btn, 2px buttons) --- */
+  --radius-sm:    2px;    /* Stitch modal buttons */
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-xl:    18px;   /* Stitch picker-close-button border-radius */
+  --radius-2xl:   24px;   /* Stitch google-picker border-radius */
+  --radius-full:  9999px;
+
+  /* --- Transiciones (Stitch: .25s cubic-bezier(.4,0,.6,1), .5s cubic-bezier(0,0,.2,1)) --- */
+  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);   /* Stitch material ease */
+  --ease-decel:      cubic-bezier(0, 0, 0.2, 1);      /* Stitch determinate circle */
+  --ease-accel:      cubic-bezier(0.4, 0, 0.6, 1);    /* Stitch opacity transition */
+  --duration-fast:   150ms;
+  --duration-base:   250ms;    /* Stitch opacity .25s */
+  --duration-slow:   500ms;    /* Stitch stroke-dasharray .5s */
+  --duration-slower: 5332ms;   /* Stitch spinner-layer full cycle */
+
+  /* --- Layout (Stitch: sidebar 80px, header mobile 48px, nav padding 16px) --- */
+  --sidebar-width:     80px;    /* Stitch .header width desktop */
+  --header-h-mobile:   48px;    /* Stitch .header mobile height */
+  --nav-z:             100;     /* Stitch --ogb-z-index */
+  --modal-z:           1004;    /* Stitch google-picker z-index */
+  --modal-bg-z:        1003;    /* Stitch google-picker bg z-index */
+  --container-max:     1200px;
+  --container-narrow:  760px;
+}
+
+/* ============================================================
+   3. ESTILOS GLOBALES DE BASE
+   ============================================================ */
+
+html {
+  font-size: var(--font-size-base);      /* Stitch base: 13px */
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior: none;             /* Stitch html overscroll-behavior: none */
+  background: var(--color-bg-primary);   /* Stitch html background: #191a1f */
+}
+
+body {
+  font-family:        var(--font-primary);         /* Stitch: font-family: Google Sans */
+  font-size:          var(--font-size-md);
+  font-weight:        var(--font-weight-regular);
+  color:              var(--color-text-primary);   /* Stitch body color: #fff */
+  background-color:   var(--color-bg-primary);     /* Stitch: background #191a1f */
+  line-height:        var(--line-height-base);     /* Stitch: line-height: 1.35 */
+  -webkit-font-smoothing: antialiased;             /* Stitch html -webkit-font-smoothing */
+  overscroll-behavior: none;                       /* Stitch body overscroll-behavior */
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: rgba(77, 144, 254, 0.30);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+a:hover {
+  color: var(--color-accent-primary-hv);
+}
+
+/* Stitch: primary-nav > a: color #fff, text-decoration: none */
+nav a {
+  color: var(--color-text-nav);
+  text-decoration: none;
+}
+
+
+/* ============================================================
+   4. CONTENEDORES Y LAYOUT GLOBAL
+   ============================================================ */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: var(--space-24);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: var(--space-24);
+}
+
+/* Layout base tipo Stitch: flex row con sidebar */
+.layout {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Stitch .main: width 100%, height 100% */
+.layout__main {
+  width: 100%;
+  min-height: 100%;
+}
+
+
+/* ============================================================
+   5. HEADER / NAVEGACIÓN
+   Stitch: header { height: 100vh; width: 80px; border-right: 1px solid #404040 }
+   Adaptado para nav horizontal full-page en Pro Digital
+   ============================================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--space-48);               /* Stitch mobile header height: 48px */
+  z-index: var(--nav-z);                 /* Stitch --ogb-z-index: 100 */
+  background: rgba(25, 26, 31, 0.92);   /* Stitch bg #191a1f con transparencia */
+  border-bottom: 1px solid var(--color-border);  /* Stitch: border 1px solid #404040 */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: background var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.site-header.scrolled {
+  background: rgba(25, 26, 31, 0.98);
+  box-shadow: var(--glow-card);          /* Stitch modal box-shadow adapted */
+}
+
+/* Nav inner */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  /* Stitch nav: padding: 16px 0 desktop → adaptado a padding inline */
+  padding-inline: var(--space-24);
+}
+
+/* Logo */
+.nav__logo {
+  font-size: var(--font-size-lg);        /* Stitch modal-title font-size: 16px */
+  font-weight: var(--font-weight-bold);  /* Stitch button font-weight: 700 */
+  color: var(--color-text-primary);      /* Stitch body color: #fff */
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.nav__logo span {
+  background: var(--gradient-text-accent);  /* Degradado azul Stitch */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Links de navegación — Stitch: primary-nav > a { color: #fff } */
+.nav__links {
+  display: flex;
+  align-items: center;
+  /* Stitch primary-nav gap mobile: 10px → desktop más generoso */
+  gap: var(--space-32);
+  list-style: none;
+}
+
+.nav__links a {
+  font-size: var(--font-size-sm);        /* Stitch nav font-size: 12px */
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-nav);          /* Stitch primary-nav color: #fff */
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  position: relative;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-accent-primary);  /* Stitch accent blue */
+  transition: width var(--duration-slow) var(--ease-decel);
+}
+
+.nav__links a:hover {
+  color: var(--color-text-primary);
+}
+
+.nav__links a:hover::after {
+  width: 100%;
+}
+
+/* CTA en navbar */
+.nav__links a.nav__cta {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  background: var(--gradient-btn);
+  color: var(--color-text-primary);
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-accent-primary-dk);
+  transition: background var(--duration-base) var(--ease-standard),
+              box-shadow  var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
+  white-space: nowrap;
+}
+
+.nav__links a.nav__cta:hover {
+  background: var(--gradient-btn-hover);
+  border-color: var(--color-accent-primary-dk);
+  box-shadow: var(--glow-accent);
+  color: var(--color-text-primary);
+}
+
+/* Hamburger — mobile (Stitch mobile: flex-direction column, padding: 0 16px) */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;                     /* Stitch picker-close-button: width 36px */
+  height: 36px;                    /* Stitch picker-close-button: height 36px */
+  border-radius: var(--radius-xl); /* Stitch picker-close-button: border-radius 18px */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--duration-base) var(--ease-standard);
+}
+
+.nav__hamburger:hover {
+  background: rgba(60, 64, 67, 0.08); /* Stitch picker-close-button:hover */
+}
+
+.nav__hamburger:active {
+  background: rgba(60, 64, 67, 0.16); /* Stitch picker-close-button:active */
+}
+
+.nav__hamburger-line {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  transition: transform var(--duration-slow) var(--ease-standard),
+              opacity var(--duration-base) var(--ease-standard),
+              width var(--duration-base) var(--ease-standard);
+}
+
+/* Estado abierto del hamburger */
+.nav__hamburger.is-open .nav__hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav__hamburger.is-open .nav__hamburger-line:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+
+.nav__hamburger.is-open .nav__hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Menú mobile drawer */
+.nav__mobile-menu {
+  position: fixed;
+  top: var(--space-48);
+  left: 0;
+  width: 100%;
+  background: rgba(25, 26, 31, 0.98); /* Stitch bg #191a1f */
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-16) var(--space-24) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);           /* Stitch primary-nav gap mobile: 10px */
+  z-index: calc(var(--nav-z) - 1);
+  transform: translateY(-110%);
+  opacity: 0;
+  transition: transform var(--duration-slow) var(--ease-standard),
+              opacity var(--duration-base) var(--ease-standard);
+  pointer-events: none;
+}
+
+.nav__mobile-menu.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav__mobile-menu a {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-nav);
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.nav__mobile-menu a:hover {
+  color: var(--color-accent-primary);
+}
+
+.nav__mobile-menu a:last-child {
+  border-bottom: none;
+}
+
+
+/* ============================================================
+   6. SECCIÓN HERO
+   ============================================================ */
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: var(--space-48);        /* Compensar navbar fijo */
+  padding-bottom: var(--space-96);
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de partículas/glow de fondo — inspirado en el "particle wave" de Stitch */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,
+      rgba(77, 144, 254, 0.12) 0%,
+      transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%,
+      rgba(77, 144, 254, 0.06) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 30% 30% at 20% 80%,
+      rgba(71, 135, 237, 0.05) 0%,
+      transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cuadrícula decorativa de fondo */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(64, 64, 64, 0.20) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(64, 64, 64, 0.20) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%,
+    black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%,
+    black 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: var(--space-24);
+}
+
+/* Badge sobre el título */
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--font-size-xs);    /* Stitch xs: 11px */
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent-primary);
+  background: rgba(77, 144, 254, 0.10);
+  border: 1px solid rgba(77, 144, 254, 0.25);
+  border-radius: var(--radius-full);
+  padding: var(--space-4) var(--space-16);
+  margin-bottom: var(--space-24);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* H1 principal */
+.hero__title {
+  font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-5xl));
+  font-weight: var(--font-weight-bold);       /* Stitch: 700 */
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);           /* Stitch: #fff */
+  margin-bottom: var(--space-24);
+  letter-spacing: -0.03em;
+}
+
+.hero__title-accent {
+  background: var(--gradient-text-accent);    /* Gradiente azul Stitch */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtítulo */
+
+.hero__subtitle {
+  font-size: clamp(var(--font-size-md), 2vw, var(--font-size-xl));
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-42); /* ← una sola declaración, sin duplicado */
+}
+
+/* Grupo de botones CTA */
+.hero__cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+}
+
+/* Indicadores de confianza bajo el hero */
+.hero__trust {
+  margin-top: var(--space-64);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-32);
+}
+
+.hero__trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--font-size-sm);      /* Stitch nav: 12px */
+  color: var(--color-text-muted);      /* Stitch muted: #616161 */
+}
+
+.hero__trust-item svg {
+  color: var(--color-accent-primary);
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   7. BOTONES
+   Basado directamente en los estados de Stitch: goog-buttonset-action
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  font-family: var(--font-primary);         /* Stitch: font-family inherit */
+  font-size: var(--font-size-xs);           /* Stitch button: 11px */
+  font-weight: var(--font-weight-bold);     /* Stitch button: font-weight 700 */
+  line-height: 27px;                        /* Stitch: line-height 27px */
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  transition:
+    background  var(--duration-base) var(--ease-standard),
+    box-shadow  var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    transform   var(--duration-fast) var(--ease-standard);
+}
+
+/* Botón primario — Stitch goog-buttonset-action */
+.btn--primary {
+  background: var(--gradient-btn);          /* Stitch: from #4d90fe to #4787ed */
+  color: var(--color-text-primary);         /* Stitch: color #fff */
+  border-color: var(--color-accent-primary-dk);  /* Stitch: border #3079ed */
+  border-radius: var(--radius-full);
+  padding: var(--space-16) var(--space-32);
+  font-size: var(--font-size-md);
+}
+
+.btn--primary:hover {
+  background: var(--gradient-btn-hover);    /* Stitch hover: from #4d90fe to #357ae8 */
+  border-color: var(--color-accent-primary-dk);
+  box-shadow: var(--glow-accent);           /* Efecto glow neón al hover */
+  transform: translateY(-1px);
+}
+
+.btn--primary:active {
+  /* Stitch active: box-shadow inset 0 1px 2px rgba(0,0,0,.3) */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.30);
+  transform: translateY(0);
+}
+
+.btn--primary:focus {
+  /* Stitch focus: box-shadow inset 0 0 0 1px #fff; outline #4d90fe */
+  box-shadow: inset 0 0 0 1px #fff, 0 0 0 3px rgba(77, 144, 254, 0.40);
+}
+
+/* Botón secundario — ghost/outline */
+.btn--secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border);        /* Stitch sidebar border: #404040 */
+  border-radius: var(--radius-full);
+  padding: var(--space-16) var(--space-32);
+  font-size: var(--font-size-md);
+}
+
+.btn--secondary:hover {
+  background: rgba(77, 144, 254, 0.08);
+  border-color: var(--color-accent-primary);
+  color: var(--color-accent-primary);
+}
+
+/* Botón de WhatsApp — variante verde */
+.btn--whatsapp {
+  background: linear-gradient(180deg, #25d366 0%, #1da851 100%);
+  color: #ffffff;
+  border-color: #1a9e47;
+  border-radius: var(--radius-full);
+  padding: var(--space-16) var(--space-32);
+  font-size: var(--font-size-md);
+}
+
+.btn--whatsapp:hover {
+  background: linear-gradient(180deg, #2ee073 0%, #22c55e 100%);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.35),
+              0 0 60px rgba(37, 211, 102, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn--whatsapp:active {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.30);
+  transform: translateY(0);
+}
+
+/* Tamaño grande para hero */
+.btn--lg {
+  padding: var(--space-20) var(--space-42);  /* Stitch modal padding: 30px 42px */
+  font-size: var(--font-size-lg);
+  line-height: 1.4;
+}
+
+/* Icono dentro del botón */
+.btn__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   8. SECCIÓN DE SERVICIOS
+   Grid 2 columnas — tarjetas estilo Stitch premium
+   ============================================================ */
+
+.services {
+  padding-block: var(--space-120);
+  background: var(--gradient-section);
+  position: relative;
+}
+
+.services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-border) 30%,
+    var(--color-border) 70%,
+    transparent 100%);
+}
+
+/* Encabezado de sección */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-64);
+}
+
+.section-header__label {
+  display: inline-block;
+  font-size: var(--font-size-xs);         /* Stitch: 11px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-16);
+}
+
+.section-header__title {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-16);
+  letter-spacing: -0.02em;
+}
+
+.section-header__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Grid de servicios */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-24);
+}
+
+/* Tarjeta de servicio — estética Stitch */
+.service-card {
+  background: var(--gradient-card);      /* Gradiente oscuro tipo Stitch */
+  border: 1px solid var(--color-border-subtle);  /* Stitch border-subtle */
+  border-radius: var(--radius-2xl);      /* Stitch google-picker: 24px */
+  padding: var(--space-42);              /* Stitch modal padding: 42px */
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color  var(--duration-slow) var(--ease-decel),
+    box-shadow    var(--duration-slow) var(--ease-decel),
+    transform     var(--duration-base) var(--ease-standard);
+  /* Stitch picker box-shadow base */
+  box-shadow: var(--glow-card);
+}
+
+/* Resplandor de borde superior (efecto neón) */
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--space-30);
+  right: var(--space-30);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(77, 144, 254, 0.50) 50%,
+    transparent 100%);
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-decel);
+}
+
+/* Círculo decorativo de luz de fondo */
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle,
+    rgba(77, 144, 254, 0.08) 0%,
+    transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-decel);
+  pointer-events: none;
+}
+
+.service-card:hover {
+  border-color: rgba(77, 144, 254, 0.35);
+  /* Stitch modal hover box-shadow ampliado */
+  box-shadow: var(--glow-card-hover);
+  transform: translateY(-4px);
+}
+
+.service-card:hover::before,
+.service-card:hover::after {
+  opacity: 1;
+}
+
+/* Ícono de la tarjeta */
+.service-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-48);             /* Stitch --ogb-height: 48px */
+  height: var(--space-48);
+  background: rgba(77, 144, 254, 0.12);
+  border: 1px solid rgba(77, 144, 254, 0.20);
+  border-radius: var(--radius-xl);    /* Stitch close-btn: 18px */
+  margin-bottom: var(--space-24);
+  color: var(--color-accent-primary);
+  transition: background var(--duration-base) var(--ease-standard),
+              box-shadow  var(--duration-base) var(--ease-standard);
+}
+
+.service-card:hover .service-card__icon {
+  background: rgba(77, 144, 254, 0.18);
+  box-shadow: var(--glow-accent);
+}
+
+/* Título de la tarjeta */
+.service-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-12);
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.01em;
+}
+
+/* Descripción */
+.service-card__description {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-24);
+}
+
+/* Lista de features dentro de la tarjeta */
+.service-card__features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);               /* Stitch gap mobile: 10px */
+}
+
+.service-card__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-10);
+  font-size: var(--font-size-sm);     /* Stitch: 12px */
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.service-card__feature-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--color-accent-primary);
+}
+
+/* Badge de velocidad/métrica */
+.service-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);    /* Stitch: 11px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  background: rgba(77, 144, 254, 0.10);
+  border: 1px solid rgba(77, 144, 254, 0.20);
+  border-radius: var(--radius-xl);   /* Stitch: 18px */
+  padding: var(--space-4) var(--space-12);
+  margin-top: var(--space-24);
+}
+
+
+/* ============================================================
+   9. SECCIÓN SOBRE NOSOTROS
+   ============================================================ */
+
+.about {
+  padding-block: var(--space-120);
+  background: var(--color-bg-secondary);
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-border) 30%,
+    var(--color-border) 70%,
+    transparent 100%);
+}
+
+/* Layout de dos columnas */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-64);
+  align-items: center;
+}
+
+/* Columna de texto — Flexbox para control preciso del espaciado entre párrafos */
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* el gap lo maneja cada elemento individualmente */
+}
+
+.about__label {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-16);
+}
+
+.about__title {
+  font-size: clamp(var(--font-size-2xl), 3.5vw, var(--font-size-4xl));
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-24);
+  letter-spacing: -0.02em;
+}
+
+/* Párrafos de cuerpo: espaciado consistente entre sí con gap del contenedor */
+.about__body {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-16); /* espacio entre párrafos consecutivos */
+}
+
+/* Último párrafo antes de la lista: más espacio de separación */
+.about__body:last-of-type {
+  margin-bottom: var(--space-32);
+}
+
+/* Lista de diferenciadores */
+.about__differentiators {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-42);
+}
+
+.about__differentiator {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+.about__differentiator-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;                         /* Stitch picker-close: 36px */
+  height: 36px;
+  border-radius: var(--radius-xl);     /* Stitch: 18px */
+  background: rgba(77, 144, 254, 0.10);
+  border: 1px solid rgba(77, 144, 254, 0.18);
+  color: var(--color-accent-primary);
+  font-size: var(--font-size-md);
+}
+
+.about__differentiator-text strong {
+  display: block;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.about__differentiator-text span {
+  font-size: var(--font-size-sm);      /* Stitch: 12px */
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Columna visual: panel con métricas estilo Stitch */
+.about__visual {
+  position: relative;
+}
+
+.about__panel {
+  background: var(--gradient-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl);    /* Stitch: 24px */
+  padding: var(--space-42);
+  box-shadow: var(--glow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.about__panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--space-30);
+  right: var(--space-30);
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(77, 144, 254, 0.40),
+    transparent);
+}
+
+/* Métricas dentro del panel */
+.about__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-24);
+}
+
+.about__metric {
+  text-align: center;
+}
+
+.about__metric-value {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  background: var(--gradient-text-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--space-8);
+}
+
+.about__metric-label {
+  font-size: var(--font-size-xs);     /* Stitch: 11px */
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Separador entre métricas */
+.about__metrics-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  background: var(--color-border-subtle);
+}
+
+
+/* ============================================================
+   10. SECCIÓN CTA / COTIZAR
+   ============================================================ */
+
+.cta-section {
+  padding-block: var(--space-120);
+  background: var(--gradient-hero);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Resplandor central Stitch */
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse,
+    rgba(77, 144, 254, 0.15) 0%,
+    transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section__title {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-heading);
+  margin-bottom: var(--space-20);
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section__subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-42);
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: var(--line-height-relaxed);
+}
+
+.cta-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+  position: relative;
+  z-index: 1;
+}
+
+.cta-section__note {
+  font-size: var(--font-size-xs);     /* Stitch: 11px */
+  color: var(--color-text-muted);     /* Stitch muted: #616161 */
+  margin-top: var(--space-20);
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ============================================================
+   11. FOOTER
+   ============================================================ */
+
+.site-footer {
+  background: var(--color-bg-primary);
+  border-top: 1px solid var(--color-border);  /* Stitch: #404040 */
+  padding-block: var(--space-42) var(--space-32);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-42);
+  margin-bottom: var(--space-42);
+}
+
+/* Columna de marca */
+.footer-brand__logo {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-16);
+  display: inline-block;
+}
+
+.footer-brand__logo span {
+  background: var(--gradient-text-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footer-brand__description {
+  font-size: var(--font-size-sm);      /* Stitch: 12px */
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-24);
+  max-width: 280px;
+}
+
+/* Redes sociales */
+.footer-brand__social {
+  display: flex;
+  gap: var(--space-12);
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;                          /* Stitch: 36px */
+  height: 36px;
+  border-radius: var(--radius-xl);      /* Stitch: 18px */
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  background: transparent;
+  transition:
+    background    var(--duration-base) var(--ease-standard),
+    border-color  var(--duration-base) var(--ease-standard),
+    color         var(--duration-base) var(--ease-standard),
+    box-shadow    var(--duration-base) var(--ease-standard);
+}
+
+.footer-social-link:hover {
+  background: rgba(77, 144, 254, 0.10);
+  border-color: rgba(77, 144, 254, 0.35);
+  color: var(--color-accent-primary);
+  box-shadow: var(--glow-accent);
+}
+
+/* Columnas de links */
+.footer-nav__title {
+  font-size: var(--font-size-xs);      /* Stitch: 11px */
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-16);
+}
+
+.footer-nav__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);               /* Stitch gap: 10px */
+}
+
+.footer-nav__list a {
+  font-size: var(--font-size-sm);     /* Stitch: 12px */
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.footer-nav__list a:hover {
+  color: var(--color-accent-primary);
+}
+
+/* Línea inferior del footer */
+.site-footer__bottom {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+.footer-copyright {
+  font-size: var(--font-size-xs);     /* Stitch: 11px */
+  color: var(--color-text-muted);     /* Stitch: #616161 */
+}
+
+.footer-credits {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.footer-credits a {
+  color: var(--color-accent-primary);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+.footer-credits a:hover {
+  color: var(--color-accent-primary-hv);
+}
+
+
+/* ============================================================
+   12. ANIMACIONES DE ENTRADA (scroll reveal)
+   Inspiradas en Stitch: transitions de opacidad .25s cubic-bezier(.4,0,.6,1)
+   ============================================================ */
+
+/* Estado inicial: elemento oculto */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity  var(--duration-slow)  var(--ease-decel),
+    transform var(--duration-slow) var(--ease-decel);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variantes de delay para stagger */
+.reveal--delay-1  { transition-delay: 100ms; }
+.reveal--delay-2  { transition-delay: 200ms; }
+.reveal--delay-3  { transition-delay: 300ms; }
+.reveal--delay-4  { transition-delay: 400ms; }
+.reveal--delay-5  { transition-delay: 500ms; }
+.reveal--delay-6  { transition-delay: 600ms; }
+
+/* Variante: slide desde la izquierda */
+.reveal--left {
+  transform: translateX(-24px);
+}
+
+.reveal--left.is-visible {
+  transform: translateX(0);
+}
+
+/* Variante: slide desde la derecha */
+.reveal--right {
+  transform: translateX(24px);
+}
+
+.reveal--right.is-visible {
+  transform: translateX(0);
+}
+
+/* Fade simple sin desplazamiento */
+.reveal--fade {
+  transform: none;
+}
+
+
+/* ============================================================
+   13. ANIMACIONES CSS KEYFRAMES
+   Extraídas y adaptadas del circular-progress de Stitch
+   ============================================================ */
+
+/* Rotación continua — Stitch: mdc-circular-progress-container-rotate */
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
+
+/* Pulso suave de glow */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: var(--glow-accent);
+  }
+  50% {
+    box-shadow: var(--glow-accent-strong);
+  }
+}
+
+/* Parpadeo de borde */
+@keyframes border-flicker {
+  0%, 100% { border-color: rgba(77, 144, 254, 0.20); }
+  50%       { border-color: rgba(77, 144, 254, 0.50); }
+}
+
+/* Flotación vertical suave */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Gradiente animado tipo partícula Stitch */
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Stitch mdc-circular-progress: spinner-layer-rotate */
+@keyframes spinner-layer-rotate {
+  12.5% { transform: rotate(135deg); }
+  25%   { transform: rotate(270deg); }
+  37.5% { transform: rotate(405deg); }
+  50%   { transform: rotate(540deg); }
+  62.5% { transform: rotate(675deg); }
+  75%   { transform: rotate(810deg); }
+  87.5% { transform: rotate(945deg); }
+  100%  { transform: rotate(1080deg); }
+}
+
+/* Hero badge glow pulsante */
+.hero__badge {
+  animation: border-flicker 3s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   14. COMPONENTES UTILITARIOS
+   ============================================================ */
+
+/* Divisor decorativo */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--color-border) 30%,
+    var(--color-border) 70%,
+    transparent 100%);
+  margin-block: var(--space-42);
+}
+
+/* Tag/chip genérico */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);    /* Stitch: 11px */
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  background: transparent;
+}
+
+.tag--accent {
+  border-color: rgba(77, 144, 254, 0.25);
+  color: var(--color-accent-primary);
+  background: rgba(77, 144, 254, 0.08);
+}
+
+/* Loader spinner (Stitch circular progress) */
+.spinner {
+  width: 40px;                        /* Stitch --EkrYwf: 40px */
+  height: 40px;
+  border: 4px solid var(--color-surface-high);  /* Stitch --EscQs: 4px */
+  border-top-color: var(--color-accent-primary); /* Stitch progress color */
+  border-radius: 50%;
+  animation: spin 1.5682s linear infinite;  /* Stitch: 1.5682352941176s */
+}
+
+/* Overlay/scrim tipo Stitch */
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: var(--color-scrim);    /* Stitch: rgba(32,33,36,.6) → opacificado */
+  z-index: calc(var(--modal-bg-z));
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+  pointer-events: none;
+}
+
+.scrim.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+  position: fixed;
+  bottom: var(--space-24);
+  right: var(--space-24);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #25d366 0%, #1da851 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35),
+              0 2px 6px rgba(0, 0, 0, 0.30);
+  z-index: calc(var(--nav-z) - 10);
+  transition:
+    transform   var(--duration-base) var(--ease-standard),
+    box-shadow  var(--duration-base) var(--ease-standard);
+  animation: float 3s ease-in-out infinite;
+  text-decoration: none;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.50),
+              0 4px 12px rgba(0, 0, 0, 0.40);
+  animation-play-state: paused;
+}
+
+/* Tooltip del float button */
+.whatsapp-float__tooltip {
+  position: absolute;
+  right: calc(100% + var(--space-12));
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-16);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-base) var(--ease-standard);
+  box-shadow: var(--glow-card);
+}
+
+.whatsapp-float:hover .whatsapp-float__tooltip {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   15. ESTADOS DE ACCESIBILIDAD
+   Stitch: outline: 1px solid #4d90fe en focus
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);  /* Stitch: #4d90fe */
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Reducir movimiento si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ============================================================
+   16. RESPONSIVE — MOBILE FIRST
+   Stitch breakpoint: @media (max-width: 768px)
+   Stitch mobile: flex-direction column, header 48px, nav padding 0 16px
+   ============================================================ */
+
+/* --- Tablet: 1024px --- */
+@media (max-width: 1024px) {
+  .services__grid {
+    gap: var(--space-20);
+  }
+
+  .about__grid {
+    gap: var(--space-42);
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-32);
+  }
+
+  .site-footer__grid > .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* --- Stitch breakpoint: @media (max-width: 768px) --- */
+@media (max-width: 768px) {
+
+  /* Tipografía mobile */
+  :root {
+    --font-size-base: 14px;
+  }
+
+  /* Navegación mobile — Stitch: flex-direction column */
+  .nav__links {
+    display: none;             /* Reemplazado por menú hamburguesa */
+  }
+
+  .nav__hamburger {
+    display: flex;
+  }
+
+  /* Hero mobile */
+  .hero {
+    padding-top: calc(var(--space-48) + var(--space-16));
+    padding-bottom: var(--space-64);
+  }
+
+  .hero__cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero__trust {
+    gap: var(--space-16);
+    margin-top: var(--space-42);
+  }
+
+  /* Grid de servicios: 1 columna en mobile */
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  .service-card {
+    padding: var(--space-30);
+  }
+
+  /* About: 1 columna */
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-42);
+  }
+
+  .about__visual {
+    order: -1;  /* Visual primero en mobile */
+  }
+
+  .about__panel {
+    padding: var(--space-30);
+  }
+
+  .about__metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer: 1 columna */
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-8);
+  }
+
+  /* CTA section */
+  .cta-section {
+    padding-block: var(--space-80);
+  }
+
+  .cta-section__actions {
+    flex-direction: column;
+  }
+
+  .cta-section__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Espaciados de sección */
+  .services,
+  .about {
+    padding-block: var(--space-80);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-42);
+  }
+
+  /* Nav mobile padding — Stitch: padding: 0 16px */
+  .nav {
+    padding-inline: var(--space-16);
+  }
+
+  /* Botón flotante WhatsApp — ajuste de posición */
+  .whatsapp-float {
+    bottom: var(--space-16);
+    right: var(--space-16);
+  }
+}
+
+
+/* --- Mobile pequeño: 480px --- */
+@media (max-width: 480px) {
+  .container {
+    padding-inline: var(--space-16);
+  }
+
+  .service-card {
+    padding: var(--space-24);
+  }
+
+  .about__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .about__metric-value {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero__title {
+    letter-spacing: -0.02em;
+  }
+}

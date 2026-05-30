@@ -568,6 +568,124 @@ nav a {
 
 
 /* ============================================================
+   HERO — Layout de dos columnas (texto + imagen decorativa)
+   ============================================================ */
+
+.hero {
+  text-align: left;               /* override del text-align: center original */
+  align-items: stretch;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-64);
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+  padding-top: var(--space-48);
+  padding-bottom: var(--space-96);
+}
+
+/* Contenido textual — ya no está centrado */
+.hero .hero__content {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-inline: 0;
+  text-align: left;
+}
+
+.hero .hero__subtitle {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.hero .hero__cta-group {
+  justify-content: flex-start;
+}
+
+.hero .hero__trust {
+  justify-content: flex-start;
+}
+
+/* Columna derecha: imagen decorativa */
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+.hero__image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(77, 144, 254, 0.20),
+    0 24px 64px rgba(0, 0, 0, 0.50),
+    0 8px 24px rgba(0, 0, 0, 0.30);
+  display: block;
+  position: relative;
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* Glow azul detrás de la imagen */
+.hero__image-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    rgba(77, 144, 254, 0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* Responsive: apila en móvil */
+@media (max-width: 900px) {
+  .hero {
+    text-align: center;
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-48);
+    padding-top: var(--space-96);
+  }
+  .hero .hero__content {
+    text-align: center;
+  }
+  .hero .hero__subtitle {
+    margin-inline: auto;
+  }
+  .hero .hero__cta-group {
+    justify-content: center;
+  }
+  .hero .hero__trust {
+    justify-content: center;
+  }
+  .hero__visual {
+    order: -1;              /* imagen arriba del texto en móvil */
+  }
+  .hero__image-frame {
+    max-width: 400px;
+  }
+}
+
+
+/* ============================================================
    7. BOTONES
    Basado directamente en los estados de Stitch: goog-buttonset-action
    ============================================================ */

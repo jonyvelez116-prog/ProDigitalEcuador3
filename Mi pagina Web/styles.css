@@ -568,6 +568,167 @@ nav a {
 
 
 /* ============================================================
+   HERO — Layout dos columnas + mockup laptop
+   ============================================================ */
+
+.hero {
+  text-align: left;
+  align-items: stretch;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-64);
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+  padding-top: var(--space-48);
+  padding-bottom: var(--space-96);
+}
+
+.hero .hero__content {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding-inline: 0;
+  text-align: left;
+}
+
+.hero .hero__subtitle {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.hero .hero__cta-group {
+  justify-content: flex-start;
+}
+
+.hero .hero__trust {
+  justify-content: flex-start;
+}
+
+/* Columna derecha */
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+}
+
+.hero__image-glow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    rgba(77, 144, 254, 0.22) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* Mockup laptop */
+.mockup-laptop {
+  width: 100%;
+  filter: drop-shadow(0 32px 64px rgba(0, 0, 0, 0.6));
+  position: relative;
+  z-index: 1;
+}
+
+.mockup-laptop__screen {
+  background: #0f1117;
+  border-radius: 10px 10px 0 0;
+  border: 2px solid #2e2e3a;
+  border-bottom: none;
+  padding: 10px 10px 0;
+  overflow: hidden;
+}
+
+.mockup-laptop__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 8px;
+}
+
+.mockup-laptop__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.mockup-laptop__dot:nth-child(1) { background: #ff5f57; }
+.mockup-laptop__dot:nth-child(2) { background: #febc2e; }
+.mockup-laptop__dot:nth-child(3) { background: #28c840; }
+
+.mockup-laptop__screen .hero__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px 4px 0 0;
+  box-shadow: none;
+}
+
+.mockup-laptop__base {
+  height: 10px;
+  background: linear-gradient(180deg, #1e1e28 0%, #16161e 100%);
+  border: 2px solid #2e2e3a;
+  border-top: 1px solid #2e2e3a;
+  border-radius: 0 0 3px 3px;
+}
+
+.mockup-laptop__foot {
+  height: 6px;
+  background: #23232d;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #2e2e3a;
+  border-top: none;
+  margin: 0 8%;
+}
+
+/* Responsive — apila en móvil */
+@media (max-width: 900px) {
+  .hero {
+    text-align: center;
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-48);
+    padding-top: var(--space-96);
+  }
+  .hero .hero__content {
+    text-align: center;
+  }
+  .hero .hero__subtitle {
+    margin-inline: auto;
+  }
+  .hero .hero__cta-group {
+    justify-content: center;
+  }
+  .hero .hero__trust {
+    justify-content: center;
+  }
+  .hero__visual {
+    order: -1;
+  }
+  .hero__image-frame {
+    max-width: 380px;
+  }
+}
+
+
+/* ============================================================
    7. BOTONES
    Basado directamente en los estados de Stitch: goog-buttonset-action
    ============================================================ */

@@ -11,7 +11,6 @@
   --text-deep: #49606d;
   --ink: #10202a;
   --line: rgba(10, 40, 60, 0.1);
-  --line-strong: rgba(10, 40, 60, 0.18);
   --blue: #0478d8;
   --blue-dark: #0460b0;
   --blue-sky: #075985;
@@ -352,7 +351,7 @@ button, summary {
 .step-card,
 .faq-item {
   border: 1px solid var(--line);
-  background: #ffffff;
+  background: var(--bg);
   box-shadow: var(--shadow-soft);
 }
 
@@ -410,11 +409,11 @@ button, summary {
 .services,
 .process,
 .faq {
-  background: #f7fbff;
+  background: var(--bg-2);
 }
 
 .included {
-  background: #f7fbff;
+  background: var(--bg-2);
   color: var(--ink);
 }
 
@@ -457,7 +456,7 @@ button, summary {
   padding: 26px;
   border: 1px solid rgba(7, 17, 23, 0.1);
   border-radius: var(--radius-lg);
-  background: #ffffff;
+  background: var(--bg);
   box-shadow: 0 18px 48px rgba(8, 31, 44, 0.09);
 }
 
@@ -564,7 +563,7 @@ button, summary {
 }
 
 .plans {
-  background: #f7fbff;
+  background: var(--bg-2);
 }
 
 .price-card {
@@ -574,7 +573,7 @@ button, summary {
   gap: 24px;
   min-height: 100%;
   padding: 26px;
-  background: #ffffff;
+  background: var(--bg);
 }
 
 .price-card--featured {
@@ -594,18 +593,6 @@ button, summary {
 
 .price-card--amber .price-card li::before {
   background: var(--gold);
-}
-
-.price-card__badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  color: #ffffff;
-  background: var(--blue);
-  border-radius: 999px;
-  padding: 7px 14px;
-  font-size: 0.76rem;
-  font-weight: 800;
 }
 
 .price-card__head p {
@@ -672,7 +659,7 @@ button, summary {
 }
 
 .about {
-  background: #f7fbff;
+  background: var(--bg-2);
   color: var(--ink);
   padding: 88px 0 48px;
 }
@@ -718,7 +705,7 @@ button, summary {
 
 .metrics-panel div {
   padding: 28px;
-  background: white;
+  background: var(--bg);
 }
 
 .metrics-panel strong {
@@ -784,7 +771,7 @@ button, summary {
 /* ── Support Section ─────────────────────────────────────────── */
 
 .support {
-  background: #ffffff;
+  background: var(--bg);
 }
 
 .support__grid {
@@ -800,7 +787,7 @@ button, summary {
   padding: 28px 26px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: #ffffff;
+  background: var(--bg);
   box-shadow: var(--shadow-soft);
   transition: border-color 220ms ease, background 220ms ease;
 }
@@ -867,7 +854,7 @@ button, summary {
 
 .final-cta {
   padding: 104px 0;
-  background: #f7fbff;
+  background: var(--bg-2);
 }
 
 .final-cta__inner {

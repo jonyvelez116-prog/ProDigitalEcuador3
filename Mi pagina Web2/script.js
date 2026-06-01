@@ -13,6 +13,13 @@
   const header = document.getElementById('site-header');
   if (header) header.style.visibility = 'hidden';
 
+  /* Emergency fallback: if anything goes wrong, unlock the page after 4s max */
+  var emergencyTimer = setTimeout(function() {
+    overlay.classList.add('is-done');
+    document.body.classList.remove('intro-active');
+    if (header) header.style.visibility = '';
+  }, 4000);
+
   /* Brand appears at ~400ms (CSS anim delay), tagline at ~750ms.
      Wait for both to be fully visible, then lift the shutter */
   setTimeout(function() {
@@ -21,6 +28,7 @@
 
   /* 1400ms wait + 1000ms slide + small buffer = 2500ms */
   setTimeout(function() {
+    clearTimeout(emergencyTimer);
     overlay.classList.add('is-done');
     document.body.classList.remove('intro-active');
     if (header) header.style.visibility = '';
@@ -59,6 +67,8 @@
   const menu = document.getElementById('mobile-menu');
   if (!button || !menu) return;
 
+  const menuLinks = menu.querySelectorAll('a');
+
   function setOpen(isOpen) {
     button.classList.toggle('is-open', isOpen);
     menu.classList.toggle('is-open', isOpen);
@@ -66,7 +76,14 @@
     button.setAttribute('aria-expanded', String(isOpen));
     button.setAttribute('aria-label', isOpen ? 'Cerrar menu' : 'Abrir menu');
     menu.setAttribute('aria-hidden', String(!isOpen));
+    /* Prevent hidden links from being reachable via Tab */
+    menuLinks.forEach(function(link) {
+      link.setAttribute('tabindex', isOpen ? '0' : '-1');
+    });
   }
+
+  /* Init: links not focusable while menu is closed */
+  menuLinks.forEach(function(link) { link.setAttribute('tabindex', '-1'); });
 
   button.addEventListener('click', function () {
     setOpen(!menu.classList.contains('is-open'));
@@ -128,11 +145,14 @@
   const title = document.querySelector('.hero__title');
   if (!title) return;
   const originalHTML = title.innerHTML;
-  if (!originalHTML.includes('WhatsApp')) return;
+  /* Find the last word/phrase to animate — look for WhatsApp first, fallback to last word */
+  const anchorWord = originalHTML.includes('WhatsApp') ? 'WhatsApp'
+    : originalHTML.match(/(\S+)\s*$/) ? originalHTML.match(/(\S+)\s*$/)[1] : null;
+  if (!anchorWord) return;
 
   title.innerHTML = originalHTML.replace(
-    'WhatsApp',
-    '<span class="typed-word" aria-live="polite">WhatsApp</span>'
+    anchorWord,
+    '<span class="typed-word" aria-live="polite">' + anchorWord + '</span>'
   );
   const span = title.querySelector('.typed-word');
   if (!span) return;
@@ -169,7 +189,8 @@
   function countUp(el) {
     const raw = el.textContent.trim();
     const m = raw.match(/^([<]?)(\d+\.?\d*)(.*)$/);
-    if (!m) return;
+    /* Skip elements that have no number to animate (e.g. "Rápida", "Ecuador") */
+    if (!m || isNaN(parseFloat(m[2]))) return;
     const pre = m[1], num = parseFloat(m[2]), suf = m[3];
     const duration = 1300, t0 = performance.now();
     (function frame(now) {
@@ -260,7 +281,7 @@
   document.body.append(dot, ring);
 
   let mx = -100, my = -100, rx = -100, ry = -100;
-  let rafId;
+  let rafId, running = true;
 
   document.addEventListener('mousemove', function(e) {
     mx = e.clientX; my = e.clientY;
@@ -268,14 +289,16 @@
     dot.style.top  = my + 'px';
   });
 
-  /* Ring follows with lag */
-  (function animateRing() {
+  /* Ring follows with lag — stops rAF when mouse leaves document */
+  function animateRing() {
+    if (!running) return;
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
     ring.style.left = rx + 'px';
     ring.style.top  = ry + 'px';
     rafId = requestAnimationFrame(animateRing);
-  })();
+  }
+  animateRing();
 
   /* Hover state on interactive elements */
   const hoverSel = 'a,button,summary,.btn,.price-card,.feature-card,.step-card,.support-card,.faq-item';
@@ -286,8 +309,14 @@
 
   document.addEventListener('mousedown', function() { dot.classList.add('is-click'); ring.classList.add('is-click'); });
   document.addEventListener('mouseup',   function() { dot.classList.remove('is-click'); ring.classList.remove('is-click'); });
-  document.addEventListener('mouseleave', function() { dot.style.opacity='0'; ring.style.opacity='0'; });
-  document.addEventListener('mouseenter', function() { dot.style.opacity='1'; ring.style.opacity='1'; });
+  document.addEventListener('mouseleave', function() {
+    dot.style.opacity = '0'; ring.style.opacity = '0';
+    running = false; cancelAnimationFrame(rafId);
+  });
+  document.addEventListener('mouseenter', function() {
+    dot.style.opacity = '1'; ring.style.opacity = '1';
+    if (!running) { running = true; animateRing(); }
+  });
 })();
 
 /* ── FAQ smooth slide (replace native <details>) ────────────── */
@@ -314,6 +343,9 @@
     const summary = item.querySelector('summary');
     const p = item.querySelector('p');
     if (!summary || !p) return;
+
+    /* Set initial aria-expanded state */
+    summary.setAttribute('aria-expanded', 'false');
 
     /* Wrap content in animated div */
     const body = document.createElement('div');
@@ -360,14 +392,14 @@
 
   cards.forEach(function(card) {
     card.style.transition = 'transform 80ms ease, box-shadow 200ms ease';
-    card.style.willChange = 'transform';
 
     card.addEventListener('mousemove', function(e) {
       const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;  /* -0.5 → 0.5 */
+      const x = (e.clientX - r.left) / r.width  - 0.5;
       const y = (e.clientY - r.top)  / r.height - 0.5;
       const rotX = (-y * MAX).toFixed(2);
       const rotY = ( x * MAX).toFixed(2);
+      card.style.willChange = 'transform';
       card.style.transform = 'perspective(700px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) translateZ(6px)';
       card.style.boxShadow = '0 24px 50px rgba(0,0,0,0.14)';
     });
@@ -378,6 +410,7 @@
       card.style.boxShadow  = '';
       setTimeout(function() {
         card.style.transition = 'transform 80ms ease, box-shadow 200ms ease';
+        card.style.willChange = 'auto';
       }, 420);
     });
   });

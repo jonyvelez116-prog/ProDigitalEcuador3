@@ -23,6 +23,7 @@
   /* Brand appears at ~400ms (CSS anim delay), tagline at ~750ms.
      Wait for both to be fully visible, then lift the shutter */
   setTimeout(function() {
+    overlay.style.willChange = 'transform';
     overlay.classList.add('is-opening'); /* CSS transition: 1000ms */
   }, 1400);
 
@@ -30,6 +31,7 @@
   setTimeout(function() {
     clearTimeout(emergencyTimer);
     overlay.classList.add('is-done');
+    overlay.style.willChange = '';
     document.body.classList.remove('intro-active');
     if (header) header.style.visibility = '';
   }, 2600);
@@ -168,17 +170,20 @@
 
   const words = ['mensajes', 'WhatsApp'];
   let wi = 0, ci = 0, deleting = false;
+  let tickTimer = null;
+  let stopped = false;
 
   function tick() {
+    if (stopped || !span.isConnected) { stopped = true; return; }
     const word = words[wi];
     span.textContent = deleting ? word.slice(0, ci - 1) : word.slice(0, ci + 1);
     deleting ? ci-- : ci++;
     let delay = deleting ? 55 : 95;
     if (!deleting && ci === word.length) { delay = 1800; deleting = true; }
     else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; delay = 280; }
-    setTimeout(tick, delay);
+    tickTimer = setTimeout(tick, delay);
   }
-  setTimeout(tick, 2400);
+  tickTimer = setTimeout(tick, 2400);
 })();
 
 /* ── Animated counters ──────────────────────────────────────── */
@@ -229,20 +234,7 @@
   }, { passive: true });
 })();
 
-/* ── Magnetic buttons ───────────────────────────────────────── */
-(function initMagnetic() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if ('ontouchstart' in window) return;
-  document.querySelectorAll('.btn--primary, .btn--whatsapp').forEach(function(btn) {
-    btn.addEventListener('mousemove', function(e) {
-      const r = btn.getBoundingClientRect();
-      const x = (e.clientX - r.left - r.width / 2) * 0.11;
-      const y = (e.clientY - r.top - r.height / 2) * 0.11;
-      btn.style.transform = 'translate(' + x + 'px,' + (y - 2) + 'px)';
-    });
-    btn.addEventListener('mouseleave', function() { btn.style.transform = ''; });
-  });
-})();
+
 
 /* ── Custom cursor ──────────────────────────────────────────── */
 (function initCursor() {
